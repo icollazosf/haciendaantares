@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reglamento · Hacienda Antares</title>
+<meta name="description" content="Reglamento y condiciones de alquiler de Hacienda Antares.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+/* Layout: resumen arriba, barra de secciones fija, una columna de lectura con bloques visuales. */
+:root{
+  --bg:#FBFCF7;--surface:#FFFFFF;--ink:#1E2B24;--muted:#5D6B63;
+  --green:#2E8B57;--green-soft:#E3F3E9;--sun:#FFC93C;--sun-soft:#FFF4D1;
+  --coral:#E8603E;--coral-soft:#FFE9E2;--line:#E4EAE3;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"DM Sans","Segoe UI",system-ui,sans-serif;
+  --r:18px;color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16.5px/1.6 var(--body)}
+a{color:inherit}
+.wrap{max-width:960px;margin:0 auto;padding-left:max(18px, env(safe-area-inset-left, 0px));padding-right:max(18px, env(safe-area-inset-right, 0px))}
+h1,h2,h3{font-family:var(--display);line-height:1.1;margin:0;letter-spacing:-.02em;text-wrap:balance}
+a:focus-visible,.btn:focus-visible{outline:3px solid var(--coral);outline-offset:3px}
+.money{font-weight:700;color:var(--green);white-space:nowrap}
+
+/* Header */
+header{position:sticky;top:0;z-index:20;background:rgba(251,252,247,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-star{width:34px;height:34px;border-radius:50%;background:var(--sun);display:grid;place-items:center}
+.logo-star svg{width:18px;height:18px}
+.logo b{font:800 20px/1 var(--display)}
+.logo small{display:block;font:500 12px/1.2 var(--body);color:var(--muted)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:999px;font:700 15px/1 var(--body);text-decoration:none;background:var(--green);color:#fff;border:0}
+.btn-ghost{background:var(--surface);color:var(--ink);border:1.5px solid var(--line)}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding-block:0 12px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{flex:none;text-decoration:none;font-size:14px;font-weight:500;padding:7px 14px;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--muted)}
+.tabs a:hover,.tabs a.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+/* Intro */
+.intro{padding-block:40px 8px}
+.eyebrow{font:700 13px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
+.intro h1{font-size:clamp(34px,6vw,58px);font-weight:800;margin-block:12px 12px}
+.intro p{color:var(--muted);max-width:40em;margin:0}
+.updated{display:inline-block;margin-top:14px;background:var(--sun-soft);padding:5px 12px;border-radius:999px;font-size:14px;font-weight:500}
+
+/* Essentials */
+.essentials{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-block:28px 8px}
+.ess{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;display:flex;gap:14px;align-items:flex-start;min-width:0}
+.ess .ic{width:44px;height:44px;border-radius:12px;background:var(--sun-soft);display:grid;place-items:center;font-size:22px;flex:none}
+.ess small{display:block;font:700 12px/1.2 var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.ess b{display:block;font:800 21px/1.15 var(--display)}
+.ess span{font-size:14px;color:var(--muted)}
+
+/* Sections */
+.doc{display:grid;gap:22px;padding-block:28px 60px}
+.sec{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:30px;scroll-margin-top:130px;min-width:0}
+.sec-head{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+.sec-head .ic{width:48px;height:48px;border-radius:14px;background:var(--green-soft);display:grid;place-items:center;font-size:24px;flex:none}
+.sec-head small{display:block;font:700 12px/1 var(--body);letter-spacing:.12em;color:var(--muted);margin-bottom:4px}
+.sec-head h2{font-size:clamp(22px,3vw,28px)}
+.sub{font-size:18px;margin:24px 0 10px;display:flex;align-items:center;gap:8px}
+.note{margin:16px 0 0;color:var(--muted);font-size:15px}
+
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+
+/* Contact cards */
+.contact{background:var(--bg);border-radius:14px;padding:14px 16px;min-width:0}
+.contact small{display:block;font:700 12px/1 var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.contact b{font-weight:500;overflow-wrap:anywhere}
+.contact.wide{grid-column:1 / -1}
+
+/* Rule rows */
+.rules{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.rules li{display:flex;gap:12px;align-items:flex-start;min-width:0}
+.rules li::before{content:"";flex:none;width:22px;height:22px;margin-top:2px;border-radius:50%;background:var(--green-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232E8B57' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12l4 4 8-8'/%3E%3C/svg%3E") center/14px no-repeat}
+.rules.dot li::before{background:var(--sun-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='4' fill='%23B07D00'/%3E%3C/svg%3E") center/14px no-repeat}
+.rules.x li::before{background:var(--coral-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23E8603E' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M7 7l10 10M17 7L7 17'/%3E%3C/svg%3E") center/12px no-repeat}
+.rules li span{min-width:0}
+
+/* Icon notes */
+.icon-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}
+.icon-item{display:flex;gap:12px;align-items:flex-start;background:var(--bg);border-radius:14px;padding:14px 16px;min-width:0}
+.icon-item i{font-style:normal;font-size:20px;line-height:1.3}
+
+/* Time cards */
+.time-card{border-radius:16px;padding:20px;background:var(--green-soft);min-width:0}
+.time-card h3{font-size:18px;margin-bottom:12px}
+.time-row{display:flex;justify-content:space-between;gap:12px;padding-block:8px;border-top:1px solid rgba(46,139,87,.18)}
+.time-row:first-of-type{border-top:0}
+.time-row span{color:var(--muted)}
+.time-row b{font-family:var(--display);font-size:18px;text-align:right}
+.time-card.alt{background:var(--sun-soft)}
+.time-card.alt .time-row{border-color:rgba(176,125,0,.2)}
+
+.time-big{background:var(--green-soft);border-radius:16px;padding:18px 20px;min-width:0}
+.time-big small{display:block;font:700 12px/1.3 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.time-big b{font:800 30px/1 var(--display)}
+.time-big span{display:block;color:var(--muted);font-size:14px;margin-top:4px}
+.time-big.alt{background:var(--sun-soft)}
+
+/* Price cards */
+.price-card{border:1px solid var(--line);border-radius:16px;padding:20px;min-width:0;display:flex;flex-direction:column;gap:12px}
+.price-card h3{font-size:18px;display:flex;align-items:center;gap:8px}
+.price-card .big{font:800 26px/1 var(--display);color:var(--green)}
+.price-card .big small{font:500 14px var(--body);color:var(--muted)}
+.price-card .rules{gap:8px;font-size:15.5px}
+
+/* Chips & bring */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--green-soft);border-radius:999px;padding:7px 14px;font-size:15px;font-weight:500}
+.bring{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.bring div{background:var(--sun-soft);border-radius:14px;padding:14px;font-weight:500;display:flex;gap:10px;align-items:center}
+.bring i{font-style:normal;font-size:22px}
+
+/* Two-up cards */
+.half{border-radius:16px;padding:22px;background:var(--bg);min-width:0}
+.half h3{font-size:19px;margin-bottom:14px;display:flex;gap:8px;align-items:center}
+.warn{background:var(--coral-soft);border-radius:12px;padding:12px 14px;margin-top:14px;font-size:14.5px}
+
+/* Fines */
+.ban{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.ban div{background:var(--coral-soft);border-radius:12px;padding:12px 14px;font-weight:500;display:flex;gap:10px;align-items:flex-start;min-width:0}
+.ban i{font-style:normal}
+.fines{display:grid;gap:8px}
+.fine{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;flex-wrap:wrap}
+.fine span{font-weight:500;flex:1 1 220px;min-width:0}
+.fine b{font-size:15px;text-align:right}
+.fine b.hard{color:var(--coral)}
+
+/* Acceptance */
+.accept{background:var(--green);color:#fff;border:0}
+.accept .sec-head .ic{background:rgba(255,255,255,.18)}
+.accept .sec-head small{color:rgba(255,255,255,.75)}
+.accept p{margin:0 0 12px;color:rgba(255,255,255,.92)}
+.accept .thanks{font:700 20px/1.3 var(--display);color:#fff;margin:6px 0 18px}
+.accept .btn{background:#fff;color:var(--green)}
+
+footer{border-top:1px solid var(--line);padding-block:24px;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+@media (max-width:820px){
+  .essentials,.grid3,.bring{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:600px){
+  .sec{padding:22px 18px}
+  .essentials,.grid2,.grid3,.bring,.icon-list,.ban{grid-template-columns:minmax(0,1fr)}
+  .nav .btn-ghost span{display:none}
+  .fine b{text-align:left}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="nav">
+      <a class="logo" href="index.html" aria-label="Volver a Hacienda Antares">
+        <span class="logo-star"><svg viewBox="0 0 24 24" fill="#1E2B24"><path d="M12 2l2.6 6.9L22 9.3l-5.8 4.6 2 7.1L12 17l-6.2 4 2-7.1L2 9.3l7.4-.4z"/></svg></span>
+        <span><b>Antares</b><small>Finca en alquiler</small></span>
+      </a>
+      <a class="btn btn-ghost" href="index.html">← <span>Volver al inicio</span></a>
+    </div>
+    <nav class="tabs" aria-label="Secciones del reglamento">
+      <a href="#info">Contacto</a>
+      <a href="#horarios">Horarios</a>
+      <a href="#tarifas">Tarifas</a>
+      <a href="#incluye">Qué traer</a>
+      <a href="#uso">Uso de la finca</a>
+      <a href="#ninos">Niños y mascotas</a>
+      <a href="#prohibiciones">Prohibiciones y multas</a>
+      <a href="#responsabilidad">Responsabilidad</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="intro">
+    <span class="eyebrow">Hacienda Antares</span>
+    <h1>Reglamento y condiciones de alquiler</h1>
+    <p>Al reservar o ingresar a Hacienda Antares, aceptas todas las normas de este reglamento. Aquí tienes primero lo más importante y abajo el detalle.</p>
+    <span class="updated">Actualizado: 10 nov 2026</span>
+
+    <div class="essentials">
+      <div class="ess"><span class="ic">🕐</span><div><small>Ingreso · Salida</small><b>1 p.m. · 5 p.m.</b><span>Después de las 5: $35.000 por persona</span></div></div>
+      <div class="ess"><span class="ic">👥</span><div><small>Capacidad</small><b>Hasta 30 personas</b><span>Solo las registradas en la reserva</span></div></div>
+      <div class="ess"><span class="ic">📅</span><div><small>Para reservar</small><b>50% del valor</b><span>El saldo se paga al ingresar</span></div></div>
+      <div class="ess"><span class="ic">🧹</span><div><small>Aseo por reserva</small><b>$80.000</b><span>Se suma a cada reserva</span></div></div>
+      <div class="ess"><span class="ic">🔐</span><div><small>Depósito</small><b>20% de la reserva</b><span>Se devuelve en 3 días hábiles</span></div></div>
+      <div class="ess"><span class="ic">👶</span><div><small>Niños</small><b>≤ 2 años gratis</b><span>Desde los 3 pagan como adulto</span></div></div>
+    </div>
+  </section>
+
+  <div class="doc">
+
+    <section class="sec" id="info">
+      <div class="sec-head"><span class="ic">📍</span><div><small>1 · INFORMACIÓN GENERAL</small><h2>Contacto y ubicación</h2></div></div>
+      <div class="grid2">
+        <div class="contact wide"><small>Dirección</small><b>Callejón Las Palmas 3 – 605, Corregimiento El Bolo San Isidro, Valle del Cauca – Colombia</b></div>
+        <div class="contact"><small>Administradora</small><b>Isabella</b></div>
+        <div class="contact"><small>Celular / WhatsApp</small><b>(+57) 317 428 7007</b></div>
+        <div class="contact"><small>Correo</small><b>haciendantares@gmail.com</b></div>
+        <div class="contact"><small>Facebook e Instagram</small><b><a href="https://www.instagram.com/haciendaantares" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.facebook.com/haciendaantares" target="_blank" rel="noopener">Facebook</a> · @haciendaantares</b></div>
+      </div>
+      <p class="note">Cualquier inquietud, sugerencia o reclamo se hace directamente con la administradora o el mayordomo. Web: www.haciendantares.com</p>
+    </section>
+
+    <section class="sec" id="horarios">
+      <div class="sec-head"><span class="ic">🕐</span><div><small>2 · HORARIOS</small><h2>Ingreso, salida y horarios de la finca</h2></div></div>
+      <div class="grid3">
+        <div class="time-big"><small>Ingreso (check-in)</small><b>1:00 p.m.</b></div>
+        <div class="time-big"><small>Salida (check-out)</small><b>5:00 p.m.</b></div>
+        <div class="time-big alt"><small>Salida después de las 5:00 p.m.</small><b><span class="money">$35.000</span></b><span>por persona</span></div>
+      </div>
+      <div class="icon-list">
+        <div class="icon-item"><i>🚪</i><span>La portería se cierra a las 10:00 p.m. y se abre a las 6:00 a.m., salvo que se acuerde otro horario.</span></div>
+        <div class="icon-item"><i>💡</i><span>Las luces de la piscina se apagan a las 10:00 p.m. Puedes seguir usando la piscina después.</span></div>
+        <div class="icon-item"><i>🤫</i><span>No se debe molestar al mayordomo después de las 10:00 p.m., salvo una urgencia.</span></div>
+        <div class="icon-item"><i>👀</i><span>Visitas para conocer la finca: lunes a viernes de 8:00 a.m. a 4:00 p.m., coordinando antes con el administrador. No sábados, domingos ni festivos.</span></div>
+      </div>
+    </section>
+
+    <section class="sec" id="tarifas">
+      <div class="sec-head"><span class="ic">💵</span><div><small>3 · TARIFAS, PAGOS Y DEPÓSITO</small><h2>Cuánto y cómo se paga</h2></div></div>
+      <div class="grid3">
+        <div class="price-card">
+          <h3>📅 Reservas</h3>
+          <div class="big">Según grupo <small>cotiza por WhatsApp</small></div>
+          <ul class="rules">
+            <li><span>Alquiler exclusivo, solo para tu grupo.</span></li>
+            <li><span>Capacidad máxima: 30 personas.</span></li>
+            <li><span>Niños de 2 años o menos no pagan. Desde los 3, como adulto.</span></li>
+            <li><span>Aseo: <span class="money">$80.000</span> por reserva.</span></li>
+            <li><span>Para reservar se paga el 50% del valor. El saldo se paga al ingresar; al pagarlo, aceptas que recibes la finca a tu entera satisfacción.</span></li>
+            <li><span>Solo entran las personas registradas. Persona adicional: <span class="money">$40.000</span> diarios, con autorización previa y pago al ingresar.</span></li>
+          </ul>
+        </div>
+        <div class="price-card">
+          <h3>❌ Cancelación</h3>
+          <div class="big" style="color:var(--coral)">Estricta</div>
+          <ul class="rules x">
+            <li><span>Si cancelas la reserva, no se devuelve el dinero pagado.</span></li>
+          </ul>
+        </div>
+        <div class="price-card">
+          <h3>🔐 Depósito de garantía</h3>
+          <div class="big">20% <small>del valor de la reserva</small></div>
+          <ul class="rules">
+            <li><span>Se entrega al iniciar la estadía.</span></li>
+            <li><span>Se devuelve en los 3 días hábiles siguientes a la salida, si no hay daños ni sanciones pendientes.</span></li>
+            <li><span>Si no cubre los daños, el huésped paga la diferencia.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="incluye">
+      <div class="sec-head"><span class="ic">🎒</span><div><small>4 · QUÉ INCLUYE Y QUÉ TRAER</small><h2>Lo que hay y lo que debes llevar</h2></div></div>
+      <h3 class="sub">✅ La finca incluye</h3>
+      <div class="chips">
+        <span class="chip">Piscina</span><span class="chip">Billar</span><span class="chip">Ping pong</span><span class="chip">Sapo</span>
+        <span class="chip">Cancha de fútbol</span><span class="chip">Juegos para niños</span><span class="chip">Camas con sábanas, almohadas y fundas</span>
+        <span class="chip">Asador</span><span class="chip">Sancocho en leña</span><span class="chip">Cocina al aire libre</span>
+        <span class="chip">Comedor</span><span class="chip">Sala</span><span class="chip">Parqueadero privado</span>
+      </div>
+      <h3 class="sub">🧳 Debes traer</h3>
+      <div class="bring">
+        <div><i>🧺</i>Cobijas y toallas</div>
+        <div><i>🧴</i>Papel higiénico, shampoo y jabón</div>
+        <div><i>🥤</i>Vasos y platos desechables, y hielo</div>
+        <div><i>💧</i>Agua potable y lavaloza</div>
+        <div><i>🔥</i>Carbón y leña (para asado o sancocho)</div>
+        <div><i>⚽</i>Balón de fútbol y de piscina</div>
+      </div>
+    </section>
+
+    <section class="sec" id="uso">
+      <div class="sec-head"><span class="ic">🏡</span><div><small>5 · USO DE LA FINCA Y SERVICIOS</small><h2>Cómo cuidamos la finca</h2></div></div>
+      <div class="grid2">
+        <div class="half">
+          <h3>🧼 Cuidado y aseo</h3>
+          <ul class="rules">
+            <li><span>Se entrega como en las fotos y se revisa contra inventario.</span></li>
+            <li><span>Deja limpios platos, vajillas, ollas y utensilios.</span></li>
+            <li><span>No dejes basura alrededor y entrega la finca aseada.</span></li>
+            <li><span>Billar y ping pong: no sentarse encima ni poner vasos o platos. Se cobra multa.</span></li>
+            <li><span>El asador se usa solo en su lugar, nunca junto a la piscina ni en el patio.</span></li>
+          </ul>
+        </div>
+        <div class="half">
+          <h3>🌳 Convivencia</h3>
+          <ul class="rules">
+            <li><span>El acceso es solo hasta el área de la cancha.</span></li>
+            <li><span>No se permite coger frutas, flores ni matas.</span></li>
+            <li><span>No se permite el maltrato a ningún animal de la finca.</span></li>
+            <li><span>La casa es libre de humo: solo se fuma en zonas externas.</span></li>
+            <li><span>No hay hora límite para la música, pero si la Policía pide bajar el volumen o apagarla, se debe acatar de inmediato.</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="icon-list">
+        <div class="icon-item"><i>⚡</i><span>La finca no tiene planta eléctrica ni acueducto propio. No respondemos por cortes de energía, agua o internet.</span></div>
+        <div class="icon-item"><i>🛠️</i><span>Si algo falla, avísanos de inmediato. Haremos lo posible por arreglarlo.</span></div>
+      </div>
+    </section>
+
+    <section class="sec" id="ninos">
+      <div class="sec-head"><span class="ic">👨‍👩‍👧</span><div><small>6 · NIÑOS Y MASCOTAS</small><h2>Para los más pequeños y los peludos</h2></div></div>
+      <div class="grid2">
+        <div class="half">
+          <h3>🧒 Niños</h3>
+          <ul class="rules dot">
+            <li><span>Los menores solo pueden estar con sus padres o un adulto responsable que los acompañe todo el tiempo.</span></li>
+            <li><span>El uso de piscina, cancha y zonas recreativas es bajo cuenta y riesgo del adulto responsable.</span></li>
+          </ul>
+          <div class="warn">La explotación y el abuso sexual de menores se sancionan penalmente en Colombia (Ley 679 de 2001 y Ley 1336 de 2009).</div>
+        </div>
+        <div class="half">
+          <h3>🐾 Mascotas</h3>
+          <ul class="rules dot">
+            <li><span>Son bienvenidas y son responsabilidad total de su dueño.</span></li>
+            <li><span>No pueden entrar a la piscina.</span></li>
+            <li><span>No pueden subirse a camas, muebles ni hamacas.</span></li>
+            <li><span>El dueño recoge sus necesidades y responde por daños o suciedad.</span></li>
+            <li><span>La finca no responde por pérdida o muerte de una mascota.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="prohibiciones">
+      <div class="sec-head"><span class="ic" style="background:var(--coral-soft)">🚫</span><div><small>7 · PROHIBICIONES Y MULTAS</small><h2>Lo que no se permite</h2></div></div>
+      <div class="ban">
+        <div><i>💊</i>Vender o consumir drogas o sustancias ilegales</div>
+        <div><i>🔫</i>Portar armas</div>
+        <div><i>⛔</i>Prostitución</div>
+        <div><i>🎟️</i>Fiestas con cover o eventos masivos sin autorización</div>
+        <div><i>🎆</i>Pólvora</div>
+        <div><i>🕯️</i>Velas o productos que manchen o dañen los pisos</div>
+        <div><i>⚠️</i>Cultos o rituales que atenten contra seres vivos</div>
+        <div><i>🚨</i>Cualquier actividad ilegal o que altere el orden público</div>
+      </div>
+      <h3 class="sub">💸 Multas</h3>
+      <div class="fines">
+        <div class="fine"><span>Salir después de las 5:00 p.m.</span><b><span class="money">$35.000</span> por persona</b></div>
+        <div class="fine"><span>Persona adicional no registrada</span><b><span class="money">$40.000</span> diarios</b></div>
+        <div class="fine"><span>Daño o pérdida de cualquier objeto</span><b>Pagar su valor</b></div>
+        <div class="fine"><span>Mal uso de billar o ping pong</span><b>Pagar su valor</b></div>
+        <div class="fine"><span>Uso de pólvora</span><b class="hard">Salida inmediata sin devolución</b></div>
+        <div class="fine"><span>Prohibiciones graves o molestias a vecinos</span><b class="hard">Salida inmediata sin devolución</b></div>
+      </div>
+      <p class="note">Las multas se pagan antes de salir de la finca.</p>
+    </section>
+
+    <section class="sec" id="responsabilidad">
+      <div class="sec-head"><span class="ic">⚖️</span><div><small>8 · RESPONSABILIDAD Y TERMINACIÓN</small><h2>Responsabilidades</h2></div></div>
+      <ul class="rules dot">
+        <li><span>Cada huésped usa las instalaciones (piscina, cancha, zonas recreativas) bajo su propia responsabilidad y con cuidado.</span></li>
+        <li><span>Te recomendamos no traer objetos de valor; la finca no se hace cargo de dinero, joyas u objetos personales.</span></li>
+        <li><span>Los daños que se causen durante la estadía los asume el huésped, primero con el depósito y, si no alcanza, con la diferencia.</span></li>
+        <li><span>Si no se cumplen las normas, la administración puede pedir que se desocupe la finca, sin devolución de dinero.</span></li>
+        <li><span>Si cancelas o te vas antes de tiempo, no hay devolución del dinero pagado.</span></li>
+        <li><span>Las condiciones legales completas están en el contrato que se firma antes de la estadía.</span></li>
+      </ul>
+    </section>
+
+    <section class="sec accept" id="aceptacion">
+      <div class="sec-head"><span class="ic">🤝</span><div><small>9 · ACEPTACIÓN</small><h2>Al reservar, aceptas este reglamento</h2></div></div>
+      <p>Al reservar, pagar o ingresar a Hacienda Antares, aceptas todas las normas de este reglamento. Las condiciones de cada estadía (fechas, número de personas, valor y depósito) quedan en el contrato que se firma con la administración.</p>
+      <p class="thanks">Gracias por elegirnos y cuidar la finca como si fuera tuya.</p>
+      <a class="btn" href="https://wa.me/573174287007?text=Hola%2C%20le%C3%AD%20el%20reglamento%20y%20quiero%20reservar%20Hacienda%20Antares." target="_blank" rel="noopener">Reservar por WhatsApp</a>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Hacienda Antares · Finca en alquiler</span>
+    <span>Callejón Las Palmas 3-605, El Bolo San Isidro, Candelaria</span>
+  </div>
+</footer>
+
+<script>
+// Resalta la sección visible en la barra de arriba
+const links=[...document.querySelectorAll('.tabs a')];
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.toggle('on',l.getAttribute('href')==='#'+e.target.id));const a=links.find(l=>l.classList.contains('on'));if(a)a.scrollIntoView({block:'nearest',inline:'center'});}})},{rootMargin:'-40% 0px -55% 0px'});
+document.querySelectorAll('.sec').forEach(s=>io.observe(s));
+</script>
+</body>
+</html>
