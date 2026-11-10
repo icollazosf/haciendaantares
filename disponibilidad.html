@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Disponibilidad · Hacienda Antares</title>
+<meta name="description" content="Calendario de disponibilidad de Hacienda Antares.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+/* Layout: encabezado, próximos fines de semana libres, cuadrícula de meses. Mismos colores que la página principal. */
+:root{
+  --bg:#FBFCF7;--surface:#FFFFFF;--ink:#1E2B24;--muted:#5D6B63;
+  --green:#2E8B57;--green-soft:#E3F3E9;--sun:#FFC93C;--sun-soft:#FFF4D1;
+  --busy:#E8603E;--busy-soft:#FFE1D6;--line:#E4EAE3;--past:#C9D1CB;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"DM Sans","Segoe UI",system-ui,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16.5px/1.6 var(--body)}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(18px, env(safe-area-inset-left, 0px));padding-right:max(18px, env(safe-area-inset-right, 0px))}
+h1,h2,h3{font-family:var(--display);line-height:1.1;margin:0;letter-spacing:-.02em;text-wrap:balance}
+a:focus-visible,button:focus-visible{outline:3px solid var(--busy);outline-offset:3px}
+
+header{position:sticky;top:0;z-index:20;background:rgba(251,252,247,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-star{width:34px;height:34px;border-radius:50%;background:var(--sun);display:grid;place-items:center}
+.logo-star svg{width:18px;height:18px}
+.logo b{font:800 20px/1 var(--display)}
+.logo small{display:block;font:500 12px/1.2 var(--body);color:var(--muted)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:999px;font:700 15px/1 var(--body);text-decoration:none;background:var(--green);color:#fff;border:0;cursor:pointer}
+.btn-ghost{background:var(--surface);color:var(--ink);border:1.5px solid var(--line)}
+
+.intro{padding-block:40px 20px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.eyebrow{font:700 13px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
+.intro h1{font-size:clamp(34px,6vw,58px);font-weight:800;margin-block:12px 10px}
+.intro p{color:var(--muted);max-width:36em;margin:0}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;font-weight:500}
+.legend span{display:flex;align-items:center;gap:8px}
+.legend i{width:18px;height:18px;border-radius:6px;display:inline-block}
+.lg-free{background:var(--green-soft);border:1.5px solid var(--green)}
+.lg-busy{background:var(--busy-soft);border:1.5px solid var(--busy)}
+.lg-past{background:#F1F3EF;border:1.5px solid var(--past)}
+
+/* Free weekends */
+.free{background:var(--sun-soft);border-radius:20px;padding:20px 22px;margin-bottom:24px}
+.free h2{font-size:20px;margin-bottom:12px}
+.free-list{display:flex;flex-wrap:wrap;gap:10px}
+.free-list a{background:var(--surface);border-radius:999px;padding:9px 16px;text-decoration:none;font-weight:700;font-size:15px;border:1.5px solid transparent}
+.free-list a:hover{border-color:var(--green)}
+.free-empty{color:var(--muted)}
+
+/* Months */
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.toolbar .range{font:700 18px/1.2 var(--display)}
+.arrows{display:flex;gap:8px}
+.arrows button{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line);background:var(--surface);font-size:20px;cursor:pointer;color:var(--ink)}
+.arrows button:disabled{opacity:.35;cursor:default}
+.months{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding-bottom:28px}
+.month{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:18px;min-width:0}
+.month h3{font-size:19px;margin-bottom:12px;text-transform:capitalize;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.month h3 small{font:500 13px var(--body);color:var(--muted);text-transform:none}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;font-variant-numeric:tabular-nums}
+.dow{font:700 11px/1 var(--body);text-align:center;color:var(--muted);padding-bottom:6px;letter-spacing:.04em}
+.day{aspect-ratio:1;border-radius:9px;display:grid;place-items:center;font-size:14px;font-weight:500;border:0;padding:0;background:var(--green-soft);color:var(--ink);text-decoration:none}
+a.day:hover{outline:2px solid var(--green)}
+.day.we{font-weight:800}
+.day.busy{background:var(--busy-soft);color:#A2391E;text-decoration:line-through;text-decoration-thickness:1.5px}
+.day.past{background:#F1F3EF;color:var(--past)}
+.day.today{box-shadow:inset 0 0 0 2px var(--ink)}
+.day.empty{background:transparent}
+
+.status{padding:16px 18px;border-radius:14px;background:var(--surface);border:1px solid var(--line);margin-bottom:20px;color:var(--muted)}
+.status.err{background:var(--busy-soft);border-color:transparent;color:var(--ink)}
+
+.cta{margin-block:8px 56px;border-radius:24px;background:var(--green);color:#fff;padding:32px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.cta h2{font-size:clamp(24px,3.4vw,34px)}
+.cta p{margin:6px 0 0;opacity:.9}
+.cta .btn{background:#fff;color:var(--green)}
+
+footer{border-top:1px solid var(--line);padding-block:24px;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+@media (max-width:900px){.months{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){
+  .months{grid-template-columns:minmax(0,1fr)}
+  .nav .btn-ghost span{display:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html" aria-label="Volver a Hacienda Antares">
+      <span class="logo-star"><svg viewBox="0 0 24 24" fill="#1E2B24"><path d="M12 2l2.6 6.9L22 9.3l-5.8 4.6 2 7.1L12 17l-6.2 4 2-7.1L2 9.3l7.4-.4z"/></svg></span>
+      <span><b>Antares</b><small>Finca en alquiler</small></span>
+    </a>
+    <a class="btn btn-ghost" href="index.html">← <span>Volver al inicio</span></a>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="intro">
+    <div>
+      <span class="eyebrow">Disponibilidad</span>
+      <h1>¿Qué fechas están libres?</h1>
+      <p>Los días en verde están disponibles. Toca uno y te escribimos por WhatsApp para confirmar precio y reserva.</p>
+    </div>
+    <div class="legend" aria-label="Convenciones">
+      <span><i class="lg-free"></i>Disponible</span>
+      <span><i class="lg-busy"></i>Ocupado</span>
+      <span><i class="lg-past"></i>Ya pasó</span>
+    </div>
+  </section>
+
+  <div class="status" id="status">Cargando disponibilidad…</div>
+
+  <section class="free" id="freeBox" hidden>
+    <h2>Próximos fines de semana libres</h2>
+    <div class="free-list" id="freeList"></div>
+  </section>
+
+  <div class="toolbar">
+    <span class="range" id="range"></span>
+    <div class="arrows">
+      <button id="prev" aria-label="Meses anteriores">‹</button>
+      <button id="next" aria-label="Meses siguientes">›</button>
+    </div>
+  </div>
+  <div class="months" id="months"></div>
+
+  <div class="cta">
+    <div>
+      <h2>¿Viste una fecha que te sirve?</h2>
+      <p>Escríbenos y te confirmamos el precio para tu grupo.</p>
+    </div>
+    <a class="btn js-wa" href="#" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year"></span> Hacienda Antares · <a href="reglamento.html">Reglamento</a></span>
+    <span>WhatsApp 317 428 7007 · @haciendaantares</span>
+  </div>
+</footer>
+
+<script>
+/* ====== EDITA AQUÍ ====== */
+const SHEET_ID = "1Y6fxyuP_8FhlOrd9nekE8TCdydx-huAwZn1BQaMXWxY"; // hoja "Hacienda Antares – Disponibilidad web"
+const SHEET_TAB = "Reservas";
+const WHATSAPP = "573174287007";
+const MESES_VISIBLES = 6;
+/* ======================== */
+
+const MESES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+const DIAS = ["L","M","M","J","V","S","D"];
+const DIAS_LARGOS = ["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
+const wa = t => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(t)}`;
+document.querySelectorAll(".js-wa").forEach(a => a.href = wa("Hola, quiero consultar disponibilidad en Hacienda Antares."));
+document.getElementById("year").textContent = new Date().getFullYear();
+
+const key = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+const today = new Date(); today.setHours(0,0,0,0);
+const busy = new Set();
+let offset = 0;
+
+function parseCell(c){
+  if (!c || c.v == null) return null;
+  // gviz devuelve "Date(2026,10,14)" (mes desde 0) o texto "2026-11-14"
+  let m = String(c.v).match(/Date\((\d+),(\d+),(\d+)/);
+  if (m) return new Date(+m[1], +m[2], +m[3]);
+  m = String(c.f || c.v).match(/(\d{4})-(\d{1,2})-(\d{1,2})/);
+  if (m) return new Date(+m[1], +m[2]-1, +m[3]);
+  m = String(c.f || c.v).match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/); // dd/mm/aaaa
+  if (m) return new Date(+m[3], +m[2]-1, +m[1]);
+  return null;
+}
+
+function load(){
+  return new Promise((resolve, reject) => {
+    const cb = "antares_" + Date.now();
+    const s = document.createElement("script");
+    const t = setTimeout(() => { cleanup(); reject(new Error("timeout")); }, 12000);
+    function cleanup(){ clearTimeout(t); delete window[cb]; s.remove(); }
+    window[cb] = res => { cleanup(); resolve(res); };
+    s.onerror = () => { cleanup(); reject(new Error("network")); };
+    s.src = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?sheet=${encodeURIComponent(SHEET_TAB)}&headers=1&tqx=responseHandler:${cb}`;
+    document.body.appendChild(s);
+  });
+}
+
+function render(){
+  const box = document.getElementById("months");
+  box.innerHTML = "";
+  const start = new Date(today.getFullYear(), today.getMonth() + offset, 1);
+  for (let i = 0; i < MESES_VISIBLES; i++){
+    const first = new Date(start.getFullYear(), start.getMonth() + i, 1);
+    const days = new Date(first.getFullYear(), first.getMonth() + 1, 0).getDate();
+    let free = 0;
+    const el = document.createElement("div"); el.className = "month";
+    let html = `<div class="grid">` + DIAS.map(d => `<div class="dow">${d}</div>`).join("");
+    const lead = (first.getDay() + 6) % 7;
+    for (let k = 0; k < lead; k++) html += `<span class="day empty"></span>`;
+    for (let d = 1; d <= days; d++){
+      const date = new Date(first.getFullYear(), first.getMonth(), d);
+      const isPast = date < today, isBusy = busy.has(key(date));
+      const we = date.getDay() === 0 || date.getDay() === 6 ? " we" : "";
+      const tod = +date === +today ? " today" : "";
+      const label = `${DIAS_LARGOS[date.getDay()]} ${d} de ${MESES[date.getMonth()]}`;
+      if (isPast) html += `<span class="day past${we}${tod}" aria-label="${label}, ya pasó">${d}</span>`;
+      else if (isBusy) html += `<span class="day busy${we}${tod}" aria-label="${label}, ocupado">${d}</span>`;
+      else { free++; html += `<a class="day${we}${tod}" href="${wa(`Hola, quiero consultar disponibilidad para el ${label} de ${date.getFullYear()} en Hacienda Antares.`)}" target="_blank" rel="noopener" aria-label="${label}, disponible">${d}</a>`; }
+    }
+    html += `</div>`;
+    el.innerHTML = `<h3>${MESES[first.getMonth()]} ${first.getFullYear()}<small>${free} días libres</small></h3>` + html;
+    box.appendChild(el);
+  }
+  const end = new Date(start.getFullYear(), start.getMonth() + MESES_VISIBLES - 1, 1);
+  document.getElementById("range").textContent = `${MESES[start.getMonth()]} ${start.getFullYear()} – ${MESES[end.getMonth()]} ${end.getFullYear()}`;
+  document.getElementById("prev").disabled = offset <= 0;
+}
+
+function freeWeekends(){
+  const list = document.getElementById("freeList"); list.innerHTML = "";
+  const d = new Date(today); d.setDate(d.getDate() + ((6 - d.getDay() + 7) % 7));
+  let found = 0;
+  for (let w = 0; w < 26 && found < 6; w++){
+    const sat = new Date(d.getFullYear(), d.getMonth(), d.getDate() + w*7);
+    const sun = new Date(sat.getFullYear(), sat.getMonth(), sat.getDate() + 1);
+    if (!busy.has(key(sat)) && !busy.has(key(sun))){
+      const txt = sat.getMonth() === sun.getMonth()
+        ? `${sat.getDate()}–${sun.getDate()} ${MESES[sat.getMonth()].slice(0,3)}`
+        : `${sat.getDate()} ${MESES[sat.getMonth()].slice(0,3)} – ${sun.getDate()} ${MESES[sun.getMonth()].slice(0,3)}`;
+      const a = document.createElement("a");
+      a.href = wa(`Hola, quiero reservar Hacienda Antares el fin de semana del ${sat.getDate()} de ${MESES[sat.getMonth()]} (sábado a domingo).`);
+      a.target = "_blank"; a.rel = "noopener"; a.textContent = txt;
+      list.appendChild(a); found++;
+    }
+  }
+  if (!found) list.innerHTML = `<span class="free-empty">No hay fines de semana libres en los próximos meses. Escríbenos para otras fechas.</span>`;
+  document.getElementById("freeBox").hidden = false;
+}
+
+document.getElementById("prev").onclick = () => { offset = Math.max(0, offset - MESES_VISIBLES); render(); };
+document.getElementById("next").onclick = () => { offset += MESES_VISIBLES; render(); };
+
+render();
+load().then(res => {
+  const rows = (res && res.table && res.table.rows) || [];
+  rows.forEach(r => {
+    const a = parseCell(r.c[0]); let b = parseCell(r.c[1]) || a;
+    if (!a) return;
+    if (b < a) b = a;
+    for (let d = new Date(a); d <= b; d.setDate(d.getDate() + 1)) busy.add(key(d));
+  });
+  document.getElementById("status").hidden = true;
+  render(); freeWeekends();
+}).catch(() => {
+  const s = document.getElementById("status");
+  s.className = "status err";
+  s.innerHTML = "No pudimos cargar el calendario en este momento. Escríbenos por WhatsApp al 317 428 7007 y te confirmamos las fechas.";
+});
+</script>
+</body>
+</html>
